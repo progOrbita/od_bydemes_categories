@@ -82,15 +82,18 @@ class Categories
         }
     }
 
-    public function display_parent(int $val){
+     * Finds the parents from the specified category until reaching the root category.
+     * shows the current category and then calls again the function with the id_parent of that category, until at some point reaching the root.
+     * @param int $id_category id of the category to find the parents
+     * @param int $root id of the root category to stop the process
+     */
+    public function display_parent(int $id_category, int $root){
+        echo $this->all_cats[$id_category]['name'].' -> ';
+        $new_par = $this->all_cats[$id_category]['id_parent'];
 
-        
-        echo ' '.$this->all_cats[$val]['name'].' -> ';
-        $new_par = $this->all_cats[$val]['id_parent'];
-        if($val == 1){
-            
+        if($id_category == $root){
             return;
         }
-        $this->display_parent((int)$new_par);
+        $this->display_parent((int)$new_par,$root);
     }
 }
