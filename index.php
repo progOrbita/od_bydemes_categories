@@ -17,3 +17,6 @@ $root_values = $categories->get_root_values();
 echo "<pre><ul>";
 echo $categories->display_categories($root_values['id_category'],$root_values['level_depth']);
 echo "</ul></pre>";
+echo '<pre>';
+$categories->display_parent(38);
+echo '</pre>';

@@ -81,4 +81,16 @@ class Categories
             }
         }
     }
+
+    public function display_parent(int $val){
+
+        
+        echo ' '.$this->all_cats[$val]['name'].' -> ';
+        $new_par = $this->all_cats[$val]['id_parent'];
+        if($val == 1){
+            
+            return;
+        }
+        $this->display_parent((int)$new_par);
+    }
 }
