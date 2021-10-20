@@ -27,25 +27,24 @@ class Categories
         }
         $this->cat_root = Db::getInstance()->getValue('SELECT id_category FROM `ps_category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
-        
+
         return $parents_list;
     }
 
     /**
      * Read categories recursively
      */
-    public function get_categories(int $root)
+    public function display_categories(int $root)
     {
         echo '<ul>';
-        echo '<li>'.$root.' '.$this->all_cats[$root]['name'].'</li>';
+        echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'] . '</li>';
 
         $temp = $this->parents_list[$root];
 
         foreach ($temp as $key => $value) {
-            $this->get_categories($value);
+            $this->display_categories($value);
         }
 
         echo '</ul>';
-
     }
 }
