@@ -33,7 +33,9 @@ class Categories
         $cat_root = Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $root_depth = Db::getInstance()->getValue('SELECT level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
-        return $parents_list;
+
+        $this->display_categories($cat_root, $root_depth);
+        return;
     }
 
     /**
