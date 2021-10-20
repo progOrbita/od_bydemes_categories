@@ -15,7 +15,7 @@ class Categories
     /**
      * Construct, initialize parents and categories arrays
      */
-    
+
     function __construct()
     {
         $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
@@ -34,11 +34,15 @@ class Categories
             $parents_list[$cat_parent][] = $cat_id;
             $this->all_cats[$cat_values['id_category']] = $cat_values;
         }
-        $cat_root = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
-        $root_depth = (int) Db::getInstance()->getValue('SELECT level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
     }
 
+    /**
+     * Obtains the id and depth of the root category
+     */
+    public function get_root_values()
+    {
+        return Db::getInstance()->getRow('SELECT id_category, level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
     }
 
     /**
