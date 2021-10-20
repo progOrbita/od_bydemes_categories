@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OrbitaDigital\OdBydemesCategories;
 
 use Db;
@@ -23,15 +25,15 @@ class Categories
         if ($cat_query === false) {
             die('<p>Error somewhere in the categories query</p>');
         }
-        foreach ($cat_query as $key => $value) {
-            $cat_parent = $value['id_parent'];
-            $cat_id = $value['id_category'];
+        foreach ($cat_query as $cat_values) {
+            $cat_parent = $cat_values['id_parent'];
+            $cat_id = $cat_values['id_category'];
 
             $parents_list[$cat_parent][] = $cat_id;
-            $this->all_cats[$value['id_category']] = $value;
+            $this->all_cats[$cat_values['id_category']] = $cat_values;
         }
-        $cat_root = Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
-        $root_depth = Db::getInstance()->getValue('SELECT level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+        $cat_root = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+        $root_depth = (int) Db::getInstance()->getValue('SELECT level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
 
         $this->display_categories($cat_root, $root_depth);
