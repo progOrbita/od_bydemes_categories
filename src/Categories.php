@@ -20,6 +20,7 @@ class Categories
         }
         foreach ($cat_query as $key => $value) {
             $cat_list[$value['id_category']] = $value;
+            $this->all_cats[$value['id_category']] = $value;
         }
         return $cat_list;
     }
