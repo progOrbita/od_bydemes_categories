@@ -19,11 +19,18 @@ class Categories
             die('<p>Error somewhere in the categories query</p>');
         }
         foreach ($cat_query as $key => $value) {
-            $cat_list[$value['id_category']] = $value;
+            $cat_parent = $value['id_parent'];
+            $cat_id = $value['id_category'];
+
+            $parents_list[$cat_parent][] = $cat_id;
             $this->all_cats[$value['id_category']] = $value;
         }
-        return $cat_list;
+        $this->cat_root = Db::getInstance()->getValue('SELECT id_category FROM `ps_category` WHERE is_root_category = 1');
+        $this->parents_list = $parents_list;
+        
+        return $parents_list;
     }
+
     /**
      * Read categories recursively
      */
