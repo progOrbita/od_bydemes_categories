@@ -18,5 +18,5 @@ echo "<pre><ul>";
 echo $categories->display_categories($root_values['id_category'],$root_values['level_depth']);
 echo "</ul></pre>";
 echo '<pre>';
-$categories->display_parent(38);
+echo $categories->display_parent(38,$root_values['id_category']);
 echo '</pre>';
