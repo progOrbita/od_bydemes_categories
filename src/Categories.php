@@ -1,5 +1,9 @@
 <?php
 
+namespace OrbitaDigital\OdBydemesCategories;
+
+use Db;
+
 class Categories
 {
 
