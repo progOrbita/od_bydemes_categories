@@ -48,22 +48,25 @@ class Categories
     /**
      * Read categories recursively.
      * Prints the element, if it's a parent add a new level, being the current_level(depth) the same than the parent.
-     * If finished reading the childs, current_level go down, at that point
+     * If is a child, will print only the <li>
+     * @param int $parent the id_category of the parent
+     * @param int $current_level actual level_depth (field) of the category
+     * @param int $previous_level previously level_depth stored in the function. Start with level 0
      */
-    public function display_categories(int $root, int $current_level, int $previous_level = 0)
+    public function display_categories(int $parent, int $current_level, int $previous_level = 0)
     {
 
-        echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'] . '</li>';
-        //Avoid entering in elements who aren't in parents. For each parent enter in the loop
-        //If is a child it will only print <li>
-        if (isset($this->parents_list[$root])) {
+        echo '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
+
+        //Avoid entering in elements who aren't in parents. The parents enter in the loop
+        if (isset($this->parents_list[$parent])) {
 
             echo '<ul>';
 
             //Previous level will takes current level as the actual one of the parent. To "restore" the tree depth
             $previous_level = $current_level;
             //Obtaining the childs of the parent
-            $childs = $this->parents_list[$root];
+            $childs = $this->parents_list[$parent];
 
             /**
              * A small explanation
