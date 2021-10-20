@@ -41,7 +41,7 @@ class Categories
     /**
      * Read categories recursively.
      */
-    public function display_categories(int $root, int $current_level, int $previous_level)
+    public function display_categories(int $root, int $current_level, int $previous_level = 0)
     {
         
         echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'].'</li>';
