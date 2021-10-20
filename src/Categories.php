@@ -12,10 +12,11 @@ class Categories
 
     public function getCategories()
     {
-        //Ordered by nleft so it goes from the very first of all the elements to the last one through all the parents with their childs
+
+        //Ordered by nleft. It goes from the first category to the last one in the tree.
         $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
-        FROM `ps_category` ca 
-        INNER JOIN `ps_category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
+        FROM `' . _DB_PREFIX_ . 'category` ca 
+        INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
 
         //key -> id_category. value are the fields: id_category, id_parent, and name from category_lang
         $parents_list = [];
@@ -29,8 +30,8 @@ class Categories
             $parents_list[$cat_parent][] = $cat_id;
             $this->all_cats[$value['id_category']] = $value;
         }
-        $this->cat_root = Db::getInstance()->getValue('SELECT id_category FROM `ps_category` WHERE is_root_category = 1');
-        $this->root_depth = Db::getInstance()->getValue('SELECT level_depth FROM `ps_category` WHERE is_root_category = 1');
+        $cat_root = Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+        $root_depth = Db::getInstance()->getValue('SELECT level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
         return $parents_list;
     }
