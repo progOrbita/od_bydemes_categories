@@ -43,29 +43,29 @@ class Categories
      */
     public function display_categories(int $root, int $current_level, int $previous_level = 0)
     {
-        
-        echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'].'</li>';
+
+        echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'] . '</li>';
         //Avoid entering in elements who aren't in parents. For each parent this if is reproduced.
         //If is a child only will print <li> and do current_level--
-        if(isset($this->parents_list[$root])){
-            
+        if (isset($this->parents_list[$root])) {
+
             echo '<ul>';
 
-            $childs = $this->parents_list[$root];
             //Previous level will takes current level as the actual one of the parent. To "restore" the tree depth
             $previous_level = $current_level;
+            //Obtaining the childs of the parent
+            $childs = $this->parents_list[$root];
 
-            foreach ($childs as $value) {
-                $this->display_categories($value,$this->all_cats[$value]['level_depth'],$previous_level);
+            foreach ($childs as $child) {
+                $this->display_categories($child, $this->all_cats[$child]['level_depth'], $previous_level);
             }
         }
         $current_level--;
 
         //Teorically, level go down everytime it exits a child, so if the previous level it's over current(child) level it will ends the <ul>. 
         //If it's a child nothing happen
-        if($current_level < $previous_level){
+        if ($current_level < $previous_level) {
             echo '</ul>';
         }
-        
     }
 }
