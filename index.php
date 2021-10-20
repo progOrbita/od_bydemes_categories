@@ -12,6 +12,8 @@ if (!defined('_PS_VERSION_')) {
 
 
 $categories = new Categories();
+$root_values = $categories->get_root_values();
+
 echo "<pre><ul>";
-echo $categories->getCategories();
+echo $categories->display_categories($root_values['id_category'],$root_values['level_depth']);
 echo "</ul></pre>";
