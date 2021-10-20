@@ -50,7 +50,7 @@ class Categories
 
         echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'] . '</li>';
         //Avoid entering in elements who aren't in parents. For each parent enter in the loop
-        //If is a child only will print <li> and do current_level--
+        //If is a child it will only print <li>
         if (isset($this->parents_list[$root])) {
 
             echo '<ul>';
@@ -61,17 +61,16 @@ class Categories
             $childs = $this->parents_list[$root];
 
             /**
-            * A small explanation
-            * Current_level go up everytime it ends a parent,  so current_level will be lesser than previous and it will add the <ul> of the parent end.
-            */
+             * A small explanation
+             * Current_level go up everytime it ends a parent,  so current_level will be lesser than previous and it will add the <ul> of the parent end.
+             */
             foreach ($childs as $child) {
                 $this->display_categories((int) $child, (int) $this->all_cats[$child]['level_depth'], (int) $previous_level);
                 $current_level--;
             }
-        }
-
-        if ($current_level < $previous_level) {
-            echo '</ul>';
+            if ($current_level < $previous_level) {
+                echo '</ul>';
+            }
         }
     }
 }
