@@ -42,12 +42,14 @@ class Categories
 
     /**
      * Read categories recursively.
+     * Prints the element, if it's a parent add a new level, being the current_level(depth) the same than the parent.
+     * If finished reading the childs, current_level go down, at that point
      */
     public function display_categories(int $root, int $current_level, int $previous_level = 0)
     {
 
         echo '<li>' . $root . ' ' . $this->all_cats[$root]['name'] . '</li>';
-        //Avoid entering in elements who aren't in parents. For each parent this if is reproduced.
+        //Avoid entering in elements who aren't in parents. For each parent enter in the loop
         //If is a child only will print <li> and do current_level--
         if (isset($this->parents_list[$root])) {
 
@@ -58,14 +60,16 @@ class Categories
             //Obtaining the childs of the parent
             $childs = $this->parents_list[$root];
 
+            /**
+            * A small explanation
+            * Current_level go up everytime it ends a parent,  so current_level will be lesser than previous and it will add the <ul> of the parent end.
+            */
             foreach ($childs as $child) {
-                $this->display_categories($child, $this->all_cats[$child]['level_depth'], $previous_level);
+                $this->display_categories((int) $child, (int) $this->all_cats[$child]['level_depth'], (int) $previous_level);
+                $current_level--;
             }
         }
-        $current_level--;
 
-        //Teorically, level go down everytime it exits a child, so if the previous level it's over current(child) level it will ends the <ul>. 
-        //If it's a child nothing happen
         if ($current_level < $previous_level) {
             echo '</ul>';
         }
