@@ -12,6 +12,6 @@ if (!defined('_PS_VERSION_')) {
 
 
 $categories = new Categories();
-print "<pre><ul>";
-print_r($categories->getCategories());
-print "</ul></pre>";
+echo "<pre><ul>";
+echo $categories->getCategories();
+echo "</ul></pre>";
