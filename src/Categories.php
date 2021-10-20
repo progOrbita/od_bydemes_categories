@@ -9,7 +9,7 @@ class Categories
     public function getCategories()
     {
         //Ordered by nleft so it goes from the very first of all the elements to the last one through all the parents with their childs
-        $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, cal.name
+        $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
         FROM `ps_category` ca 
         INNER JOIN `ps_category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
 
@@ -27,7 +27,6 @@ class Categories
         }
         $this->cat_root = Db::getInstance()->getValue('SELECT id_category FROM `ps_category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
-
         return $parents_list;
     }
 
