@@ -12,10 +12,12 @@ class Categories
     private $parents_list = [];
     private $all_cats = [];
 
-    public function getCategories()
+    /**
+     * Construct, initialize parents and categories arrays
+     */
+    
+    function __construct()
     {
-
-        //Ordered by nleft. It goes from the first category to the last one in the tree.
         $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
         FROM `' . _DB_PREFIX_ . 'category` ca 
         INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
@@ -35,9 +37,8 @@ class Categories
         $cat_root = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $root_depth = (int) Db::getInstance()->getValue('SELECT level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
         $this->parents_list = $parents_list;
+    }
 
-        $this->display_categories($cat_root, $root_depth);
-        return;
     }
 
     /**
