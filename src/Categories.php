@@ -64,9 +64,6 @@ class Categories
     public function display_categories(int $parent)
     {
         //Tags at beggining
-        if ($parent == $this->root_id) {
-            echo '<pre><ul>';
-        }
         echo '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
 
         if (isset($this->parents_list[$parent])) {
@@ -87,7 +84,7 @@ class Categories
 
             //Tags at the end
             if ($parent === $this->root_id) {
-                echo '</pre></ul>';
+                return '<pre><ul>'.$this->tree_info.'</pre></ul>';
             }
         }
     }
