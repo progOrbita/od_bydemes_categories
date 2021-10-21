@@ -9,14 +9,10 @@ if (!defined('_PS_VERSION_')) {
     require_once '../../init.php';
 }
 
-
-
 $categories = new Categories();
-$root_values = $categories->get_root_values();
+$root_id = $categories->get_cat_root_id();
 
-echo "<pre><ul>";
-echo $categories->display_categories($root_values['id_category'],$root_values['level_depth']);
-echo "</ul></pre>";
 echo '<pre>';
 echo $categories->display_parent(38,$root_values['id_category']);
 echo '</pre>';
+$categories->display_categories($root_id);
