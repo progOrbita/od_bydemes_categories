@@ -20,6 +20,7 @@ class Categories
     //string that will contains the category tree
     private $tree_info = '';
 
+    //Name of the parents (and the child) for breadcrumbs
     private $parent_info = '';
 
     /**
@@ -28,21 +29,36 @@ class Categories
 
     function __construct()
     {
-        $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
-        FROM `' . _DB_PREFIX_ . 'category` ca 
-        INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
-
-        if ($cat_query === false) {
+        $categories_data = $this->find_categories();
+        if (!$categories_data) {
             die('<p>Error somewhere in the categories query</p>');
         }
-        $this->root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
-
+        $this->findCategoryRoot();
         if (!$this->root_id) {
             die('<p>Id of category root not found</p>');
         }
 
+        $this->generateArrays($categories_data);
+    }
+    private function find_categories()
+    {
+
+        $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
+        FROM `' . _DB_PREFIX_ . 'category` ca 
+        INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
+
+        return $cat_query;
+    }
+
+    private function findCategoryRoot()
+    {
+        $this->root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+    }
+
+    private function generateArrays(array $cats_info)
+    {
         //key -> id_category. value are the fields: id_category, id_parent, and name from category_lang
-        foreach ($cat_query as $cat_values) {
+        foreach ($cats_info as $cat_values) {
             $cat_parent = $cat_values['id_parent'];
             $cat_id = $cat_values['id_category'];
 
@@ -50,7 +66,6 @@ class Categories
             $this->all_cats[$cat_id] = $cat_values;
         }
     }
-
     /**
      * Obtains the id of the root category
      * @return int id of the category root
