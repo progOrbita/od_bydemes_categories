@@ -17,6 +17,9 @@ class Categories
     //Data of all the categories
     private $all_cats = [];
 
+    //string that will contains the category tree
+    private $tree_info = '';
+
     /**
      * Construct, initialize parents, categories arrays and obtains the id of the category root.
      */
@@ -64,11 +67,12 @@ class Categories
     public function display_categories(int $parent)
     {
         //Tags at beggining
-        echo '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
+
+        $this->tree_info .= '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
 
         if (isset($this->parents_list[$parent])) {
 
-            echo '<ul>';
+            $this->tree_info .= '<ul>';
 
             //Obtaining the childs of the parent
             $childs = $this->parents_list[$parent];
@@ -80,9 +84,9 @@ class Categories
                 $this->display_categories((int) $child);
             }
 
-            echo '</ul>';
+            $this->tree_info .= '</ul>';
 
-            //Tags at the end
+            //Returns the tree, adding start/end tags
             if ($parent === $this->root_id) {
                 return '<pre><ul>'.$this->tree_info.'</pre></ul>';
             }
