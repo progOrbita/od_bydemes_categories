@@ -90,11 +90,11 @@ class Categories
             $this->tree_info .= '<pre><ul>';
         }
         if (!isset($this->parents_list[$parent])) {
-        $this->tree_info .= '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
+            $this->tree_info .= '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
         }
         
         if (isset($this->parents_list[$parent])) {
-            $this->tree_info .= '<li class="red">' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
+            $this->tree_info .= '<li class="disabled">' . $parent . ' ' . $this->all_cats[$parent]['name'] . '<i class="bi bi-arrow-right"></i></li>';
 
             $this->tree_info .= '<ul>';
             //Obtaining the childs of the parent
