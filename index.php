@@ -45,25 +45,26 @@
     echo $categories->display_parent(722, $root_id);
     echo $categories->display_categories($root_id);
 
+    ?>
+
+</body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-        $(document).ready(function(){
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script>
+    $(document).ready(function() {
+        //Dropdown-submenu
+        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass('show');
 
-            $(document).on('click','.disabled',function(){
-                $(this).find("i").remove();
-
-                $(this).append('<i class="bi bi-arrow-down"></i>');
-                $(this).addClass('active');
-                $(this).removeClass('disabled');
-            });
-
-            $(document).on('click','.active',function(){
-                $(this).find("i").remove();
-                $(this).append('<i class="bi bi-arrow-right"></i>');
-                $(this).addClass('disabled');
-                $(this).removeClass('active');
-            });
-
+            return false;
         });
-    </script>
+
+    });
+</script>
+
 </html>
