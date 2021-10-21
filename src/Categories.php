@@ -30,7 +30,7 @@ class Categories
         if ($cat_query === false) {
             die('<p>Error somewhere in the categories query</p>');
         }
-        $this->root_id = Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+        $this->root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
 
         if (!$this->root_id) {
             die('<p>Id of category root not found</p>');
