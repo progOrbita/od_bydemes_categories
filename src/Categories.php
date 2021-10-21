@@ -23,7 +23,6 @@ class Categories
         INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
 
         //key -> id_category. value are the fields: id_category, id_parent, and name from category_lang
-        $parents_list = [];
         if ($cat_query === false) {
             die('<p>Error somewhere in the categories query</p>');
         }
@@ -31,10 +30,9 @@ class Categories
             $cat_parent = $cat_values['id_parent'];
             $cat_id = $cat_values['id_category'];
 
-            $parents_list[$cat_parent][] = $cat_id;
-            $this->all_cats[$cat_values['id_category']] = $cat_values;
+            $this->parents_list[$cat_parent][] = $cat_id;
+            $this->all_cats[$cat_id] = $cat_values;
         }
-        $this->parents_list = $parents_list;
     }
 
     /**
