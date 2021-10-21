@@ -57,37 +57,30 @@ class Categories
 
     /**
      * Read categories recursively.
-     * Prints the element, if it's a parent add a new level, being the current_level(depth) the same than the parent.
-     * If is a child, will print only the <li>
-     * @param int $parent the id_category of the parent
-     * @param int $current_level actual level_depth (field) of the category
-     * @param int $previous_level previously level_depth stored in the function. Start with level 0
+     * Prints the element, if is a child, will print only the <li>
+     * parents will print <ul> at the beggining and </ul> when they ends
+     * @param int $parent the id_category of the parent or child
      */
-    public function display_categories(int $parent, int $current_level, int $previous_level = 0)
+    public function display_categories(int $parent)
     {
-
         echo '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
 
-        //Avoid entering in elements who aren't in parents. The parents enter in the loop
         if (isset($this->parents_list[$parent])) {
 
             echo '<ul>';
 
-            //Previous level will takes current level as the actual one of the parent. To "restore" the tree depth
-            $previous_level = $current_level;
             //Obtaining the childs of the parent
             $childs = $this->parents_list[$parent];
 
             /**
-             * A small explanation
-             * Current_level go up everytime it ends a parent,  so current_level will be lesser than previous and it will add the <ul> of the parent end.
+             * Childs will only display the <li>, parents will print <ul> and then </ul> when it ends
              */
             foreach ($childs as $child) {
-                $this->display_categories((int) $child, (int) $this->all_cats[$child]['level_depth'], (int) $previous_level);
-                $current_level--;
+                $this->display_categories((int) $child);
             }
-            if ($current_level < $previous_level) {
-                echo '</ul>';
+
+            echo '</ul>';
+
             }
         }
     }
