@@ -26,24 +26,24 @@
     </style>
 </head>
 
-use OrbitaDigital\OdBydemesCategories\Categories;
+<body>
 
-require_once __DIR__ . '/vendor/autoload.php';
+    <?php
 
-if (!defined('_PS_VERSION_')) {
-    require_once '../../config/config.inc.php';
-    require_once '../../init.php';
-}
+    use OrbitaDigital\OdBydemesCategories\Categories;
 
-$categories = new Categories();
-$root_id = $categories->get_cat_root_id();
+    require_once __DIR__ . '/vendor/autoload.php';
 
-echo $categories->display_parent(38, $root_id);
-echo $categories->display_categories($root_id);
+    if (!defined('_PS_VERSION_')) {
+        require_once '../../config/config.inc.php';
+        require_once '../../init.php';
+    }
 
-?>
+    $categories = new Categories();
+    $root_id = $categories->get_cat_root_id();
 
-</body>
+    echo $categories->display_parent(722, $root_id);
+    echo $categories->display_categories($root_id);
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
