@@ -20,6 +20,8 @@ class Categories
     //string that will contains the category tree
     private $tree_info = '';
 
+    private $parent_info = '';
+
     /**
      * Construct, initialize parents, categories arrays and obtains the id of the category root.
      */
@@ -100,13 +102,12 @@ class Categories
      */
     public function display_parent(int $id_category, int $root)
     {
-        echo $this->all_cats[$id_category]['name'] . ' -> ';
+        $this->parent_info .= $this->all_cats[$id_category]['name'] . ' -> ';
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
-        if ($id_category == $root) {
-            return;
+        if ($id_category != $root) {
+            $this->display_parent((int)$new_par, $root);
         }
-
-        $this->display_parent((int)$new_par, $root);
+            return '<pre>'.$this->parent_info.'</pre>';
     }
 }
