@@ -12,7 +12,6 @@ if (!defined('_PS_VERSION_')) {
 $categories = new Categories();
 $root_id = $categories->get_cat_root_id();
 
-echo '<pre>';
-echo $categories->display_parent(38,$root_values['id_category']);
-echo '</pre>';
-$categories->display_categories($root_id);
+echo $categories->display_parent(38, $root_id);
+echo $categories->display_categories($root_id);
+
