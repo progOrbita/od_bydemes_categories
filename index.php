@@ -5,6 +5,9 @@
             .red{
                 color: red;
             }
+            .red:hover, .green:hover{
+                cursor: pointer;
+            }
             .red + ul{
                 display: none;
             }
