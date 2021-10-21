@@ -32,7 +32,7 @@ class Categories
         }
         $this->root_id = Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
 
-        if(!$this->root_id){
+        if (!$this->root_id) {
             die('<p>Id of category root not found</p>');
         }
 
@@ -97,13 +97,15 @@ class Categories
      * @param int $id_category id of the category to find the parents
      * @param int $root id of the root category to stop the process
      */
-    public function display_parent(int $id_category, int $root){
-        echo $this->all_cats[$id_category]['name'].' -> ';
+    public function display_parent(int $id_category, int $root)
+    {
+        echo $this->all_cats[$id_category]['name'] . ' -> ';
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
-        if($id_category == $root){
+        if ($id_category == $root) {
             return;
         }
-        $this->display_parent((int)$new_par,$root);
+
+        $this->display_parent((int)$new_par, $root);
     }
 }
