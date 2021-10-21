@@ -8,12 +8,17 @@ use Db;
 
 class Categories
 {
+    //Id of root category
+    private $root_id;
 
+    //Parents and their childs as elements
     private $parents_list = [];
+
+    //Data of all the categories
     private $all_cats = [];
 
     /**
-     * Construct, initialize parents and categories arrays
+     * Construct, initialize parents, categories arrays and obtains the id of the category root.
      */
 
     function __construct()
@@ -22,10 +27,16 @@ class Categories
         FROM `' . _DB_PREFIX_ . 'category` ca 
         INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
 
-        //key -> id_category. value are the fields: id_category, id_parent, and name from category_lang
         if ($cat_query === false) {
             die('<p>Error somewhere in the categories query</p>');
         }
+        $this->root_id = Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+
+        if(!$this->root_id){
+            die('<p>Id of category root not found</p>');
+        }
+
+        //key -> id_category. value are the fields: id_category, id_parent, and name from category_lang
         foreach ($cat_query as $cat_values) {
             $cat_parent = $cat_values['id_parent'];
             $cat_id = $cat_values['id_category'];
