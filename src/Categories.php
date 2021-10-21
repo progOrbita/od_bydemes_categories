@@ -84,19 +84,17 @@ class Categories
     public function display_categories(int $parent)
     {
         //Tags at beggining
-
+        if ($parent == $this->root_id) {
+            $this->tree_info .= '<pre><ul>';
+        }
         $this->tree_info .= '<li>' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
 
         if (isset($this->parents_list[$parent])) {
 
             $this->tree_info .= '<ul>';
-
             //Obtaining the childs of the parent
             $childs = $this->parents_list[$parent];
 
-            /**
-             * Childs will only display the <li>, parents will print <ul> and then </ul> when it ends
-             */
             foreach ($childs as $child) {
                 $this->display_categories((int) $child);
             }
@@ -105,7 +103,7 @@ class Categories
 
             //Returns the tree, adding start/end tags
             if ($parent === $this->root_id) {
-                return '<pre><ul>'.$this->tree_info.'</pre></ul>';
+                return $this->tree_info . '</ul></pre>';
             }
         }
     }
