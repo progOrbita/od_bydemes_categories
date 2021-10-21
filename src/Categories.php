@@ -47,11 +47,12 @@ class Categories
     }
 
     /**
-     * Obtains the id and depth of the root category
+     * Obtains the id of the root category
+     * @return int id of the category root
      */
-    public function get_root_values()
+    public function get_cat_root_id()
     {
-        return Db::getInstance()->getRow('SELECT id_category, level_depth FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+        return $this->root_id;
     }
 
     /**
