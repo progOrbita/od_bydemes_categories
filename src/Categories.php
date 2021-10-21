@@ -23,6 +23,8 @@ class Categories
     //Name of the parents (and the child) for breadcrumbs
     private $parent_info = '';
 
+    private $arr_parents = [];
+
     /**
      * Construct, initialize parents, categories arrays and obtains the id of the category root.
      */
@@ -108,6 +110,7 @@ class Categories
         }
     }
 
+    /**
      * Finds the parents from the specified category until reaching the root category.
      * shows the current category and then calls again the function with the id_parent of that category, until at some point reaching the root.
      * @param int $id_category id of the category to find the parents
@@ -115,12 +118,17 @@ class Categories
      */
     public function display_parent(int $id_category, int $root)
     {
-        $this->parent_info .= $this->all_cats[$id_category]['name'] . ' -> ';
+
+        $this->arr_parents[$id_category] = $this->all_cats[$id_category]['name'] . ' -> ';
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
         if ($id_category != $root) {
-            $this->display_parent((int)$new_par, $root);
+            return $this->display_parent((int)$new_par, $root);
         }
-            return '<pre>'.$this->parent_info.'</pre>';
+
+        foreach (array_reverse($this->arr_parents) as $value) {
+            $this->parent_info .= $value;
+        }
+        return '<pre>' . $this->parent_info . '</pre>';
     }
 }
