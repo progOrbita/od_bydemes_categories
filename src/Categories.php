@@ -122,7 +122,7 @@ class Categories
     public function display_parent(int $id_category, int $root)
     {
 
-        $this->arr_parents[$id_category] = $this->all_cats[$id_category]['name'] . ' -> ';
+        $this->arr_parents[$id_category] = $this->all_cats[$id_category]['name'];
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
         if ($id_category != $root) {
@@ -130,7 +130,7 @@ class Categories
         }
 
         foreach (array_reverse($this->arr_parents) as $value) {
-            $this->parent_info .= $value;
+            $this->parent_info .= $value . ' -> ';
         }
         return '<pre>' . $this->parent_info . '</pre>';
     }
