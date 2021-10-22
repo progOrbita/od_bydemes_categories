@@ -64,12 +64,17 @@ if (isset($_POST['id_cat'])) {
 <body>
     <?php
     echo
-    '<div id="parents">' .
-        $categories->display_parent(722, $root_id) .
-        '</div>' .
-        '<div id="tree">' .
-        $categories->display_categories($root_id) .
-        '</div>';
+    '<div class="container-fluid">
+        <div class="row">
+            <div class="col" id="tree">' .
+            $categories->display_categories($root_id) .
+            '</div>
+            </div>
+            <div class="col" id="parents">' .
+                $categories->display_parent($root_id, $root_id) .
+            '</div>
+        </div>
+    </div>';
     ?>
 
 </body>
