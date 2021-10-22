@@ -143,9 +143,6 @@ class Categories
             return $this->display_parent((int)$new_par, $root);
         }
 
-        foreach (array_reverse($this->arr_parents) as $value) {
-            $this->parent_info .= $value . ' -> ';
-        }
-        return '<pre>' . $this->parent_info . '</pre>';
+       return '<pre>' . implode(' -> ',array_reverse($this->arr_parents)). '</pre>';
     }
 }
