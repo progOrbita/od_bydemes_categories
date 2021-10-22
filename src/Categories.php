@@ -47,7 +47,7 @@ class Categories
     private function find_categories()
     {
 
-        $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
+        $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, ca.active, cal.name
         FROM `' . _DB_PREFIX_ . 'category` ca 
         INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = ' . $this->lang_es['id_lang'] . ' ORDER BY `nleft` ASC');
 
@@ -138,10 +138,16 @@ class Categories
      */
     public function display_parent(int $id_category, int $root)
     {
-        $cat_name = $this->all_cats[$id_category]['name'];
-        //replaces troublesome header characters to -
-        $cat_clean = str_replace(['/', ' ', '(', ')'], '-', $cat_name);
+        $cat_name = strtolower($this->all_cats[$id_category]['name']);
+        //cleanup troublesome header characters
+        $cat_replaced = str_replace(['"'],'',$cat_name);
+        $cat_clean = str_replace([' / ',' ', '(', ')','-&-','/'], '-', $cat_replaced);
+        if($this->all_cats[$id_category]['active'] == 1){
         $this->arr_parents[$id_category] = '<a href="' . _PS_BASE_URL_ . __PS_BASE_URI__ . $this->lang_es['iso_code'] . '/' . $id_category . '-' . $cat_clean . '">' . $this->all_cats[$id_category]['name'] . '</a>';
+        }
+        else{
+            $this->arr_parents[$id_category] = $this->all_cats[$id_category]['name'];
+        }
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
         if ($id_category != $root) {
