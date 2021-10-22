@@ -34,6 +34,9 @@ if (isset($_POST['id_cat'])) {
         .dropdown-menu {
             background-color: #007bff;
         }
+        .dropdown-item {
+            border-radius: 5px;
+        }
         .dropdown-item:hover{
             cursor: pointer;
         }
