@@ -87,15 +87,27 @@ class Categories
     {
         //Tags at beggining
         if ($parent == $this->root_id) {
-            $this->tree_info .= '<div class="dropdown show"><a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</a>';
+            $this->tree_info .= '<div class="dropdown show">
+                <div class="btn-group">
+                    <a class="btn btn-primary"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
+                    
+                <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                    </a> ';
         }
         if (!isset($this->parents_list[$parent])) {
-            $this->tree_info .= '<li class="dropdown-item">' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</li>';
+            $this->tree_info .= '<a class="dropdown-item"><input type="hidden" value="' . $parent . '"> ' . $this->all_cats[$parent]['name'] . '</a>';
         }
-        
+
         if (isset($this->parents_list[$parent])) {
-            if($parent != $this->root_id){
-                $this->tree_info .= '<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">' . $parent . ' ' . $this->all_cats[$parent]['name'] . '</a>';
+            if ($parent != $this->root_id) {
+                $this->tree_info .= '<li class="dropdown-submenu">
+                <div class="btn-group">
+                    <a class="btn btn-primary">
+                    <input type="hidden" value="' . $parent . '">
+                    ' . $this->all_cats[$parent]['name'] . '
+                    </a>
+                <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                    </a>';
             }
             $this->tree_info .= '<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
             //Obtaining the childs of the parent
@@ -104,10 +116,10 @@ class Categories
             foreach ($childs as $child) {
                 $this->display_categories((int) $child);
             }
-
-            $this->tree_info .= '</ul></li>';
-
-            //Returns the tree, adding start/end tags
+            if ($parent != $this->root_id) {
+                $this->tree_info .= '</ul></li>';
+            }
+            //Returns the tree, adding end tags
             if ($parent === $this->root_id) {
                 return $this->tree_info . '</ul></div>';
             }
