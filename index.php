@@ -79,10 +79,10 @@ if (isset($_POST['id_cat'])) {
 
             return false;
         });
-        //Select all the childs that aren't the small tag
+        //Select all the links (parent and childs) that aren't the small icon
         $('a:not(a.dropdown-toggle-split').on('click', function() {
             let id = $(this).find('input').val();
-            console.log(id);
+
             let ajaxRequest = $.ajax({
                 url: 'index.php',
                 context: document.body,
