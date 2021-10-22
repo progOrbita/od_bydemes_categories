@@ -20,6 +20,8 @@ class Categories
     //string that will contains the category tree
     private $tree_info = '';
 
+    //spain lang id and iso code
+    private $lang_es;
 
     private $arr_parents = [];
 
@@ -29,6 +31,8 @@ class Categories
 
     function __construct()
     {
+        $this->lang_es = Db::getInstance()->getRow('SELECT `id_lang`, `iso_code` FROM ' . _DB_PREFIX_ . 'lang WHERE `iso_code` = "es"');
+
         $categories_data = $this->find_categories();
         if (!$categories_data) {
             die('<p>Error somewhere in the categories query</p>');
@@ -45,7 +49,7 @@ class Categories
 
         $cat_query = Db::getInstance()->executeS('SELECT ca.id_category, ca.id_parent, ca.level_depth, cal.name
         FROM `' . _DB_PREFIX_ . 'category` ca 
-        INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = 1 ORDER BY `nleft` ASC');
+        INNER JOIN `' . _DB_PREFIX_ . 'category_lang` cal ON ca.id_category = cal.id_category WHERE cal.id_lang = ' . $this->lang_es['id_lang'] . ' ORDER BY `nleft` ASC');
 
         return $cat_query;
     }
