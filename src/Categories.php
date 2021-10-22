@@ -20,8 +20,6 @@ class Categories
     //string that will contains the category tree
     private $tree_info = '';
 
-    //Name of the parents (and the child) for breadcrumbs
-    private $parent_info = '';
 
     private $arr_parents = [];
 
@@ -143,6 +141,6 @@ class Categories
             return $this->display_parent((int)$new_par, $root);
         }
 
-       return '<pre>' . implode(' -> ',array_reverse($this->arr_parents)). '</pre>';
+        return '<pre>' . implode(' -> ', array_reverse($this->arr_parents)) . '</pre>';
     }
 }
