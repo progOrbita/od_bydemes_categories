@@ -138,7 +138,10 @@ class Categories
      */
     public function display_parent(int $id_category, int $root)
     {
-        $this->arr_parents[$id_category] = $this->all_cats[$id_category]['name'];
+        $cat_name = $this->all_cats[$id_category]['name'];
+        //replaces troublesome header characters to -
+        $cat_clean = str_replace(['/', ' ', '(', ')'], '-', $cat_name);
+        $this->arr_parents[$id_category] = '<a href="' . _PS_BASE_URL_ . __PS_BASE_URI__ . $this->lang_es['iso_code'] . '/' . $id_category . '-' . $cat_clean . '">' . $this->all_cats[$id_category]['name'] . '</a>';
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
         if ($id_category != $root) {
