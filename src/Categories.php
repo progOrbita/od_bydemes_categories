@@ -89,7 +89,7 @@ class Categories
         if ($parent == $this->root_id) {
             $this->tree_info .= '<div class="dropdown show">
                 <div class="btn-group">
-                    <a class="btn btn-primary"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
+                    <a class="dropdown-item"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
                 <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a> ';
         }
         if (!isset($this->parents_list[$parent])) {
@@ -101,7 +101,7 @@ class Categories
                 $this->tree_info .= '
                 <li class="dropdown-submenu">
                     <div class="btn-group">
-                        <a class="btn btn-primary">
+                        <a class="dropdown-item">
                         <input type="hidden" value="' . $parent . '">
                         ' . $this->all_cats[$parent]['name'] . '
                         </a>
