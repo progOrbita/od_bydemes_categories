@@ -58,6 +58,11 @@ if (isset($_POST['id_cat'])) {
             margin-left: .1rem;
             margin-right: .1rem;
         }
+        #cat_root{
+            display: block;
+            padding: 0px;
+            min-width: 0px;
+        }
         #tree, #parents{
             margin-top: 12px;
         }

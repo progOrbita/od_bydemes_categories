@@ -89,7 +89,7 @@ class Categories
     {
         //Tags at beggining
         if ($parent == $this->root_id) {
-            $this->tree_info .= '<div class="dropdown show">
+            $this->tree_info .= '<div id="cat_root" class="dropdown-menu">
                 <div class="btn-group">
                     <a class="dropdown-item"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
                 <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a> ';
