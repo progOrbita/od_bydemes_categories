@@ -94,7 +94,7 @@ if (isset($_POST['id_cat'])) {
             return false;
         });
         //Select all the links (parent and childs) that aren't the small icon
-        $('a:not(a.dropdown-toggle-split').on('click', function() {
+        $('.dropdown-item').on('click', function() {
             let id = $(this).find('input').val();
 
             let ajaxRequest = $.ajax({
