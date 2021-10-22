@@ -1,3 +1,24 @@
+<?php
+
+use OrbitaDigital\OdBydemesCategories\Categories;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+if (!defined('_PS_VERSION_')) {
+    require_once '../../config/config.inc.php';
+    require_once '../../init.php';
+}
+
+$categories = new Categories();
+
+$root_id = $categories->get_cat_root_id();
+
+if (isset($_POST['id_cat'])) {
+    echo $categories->display_parent($_POST['id_cat'], $root_id);
+    exit();
+}
+
+?>
 <html>
 
 <head>
