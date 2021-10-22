@@ -63,7 +63,23 @@
 
             return false;
         });
-
+        //Select all the childs that aren't the small tag
+        $('a:not(a.dropdown-toggle-split').on('click', function() {
+            let id = $(this).find('input').val();
+            console.log(id);
+            let ajaxRequest = $.ajax({
+                url: 'index.php',
+                context: document.body,
+                data: {
+                    'id_cat': id
+                },
+                type: "POST"
+            });
+            ajaxRequest.done(function(data) {
+                $('#parents').empty();
+                $('#parents').append(data);
+            });
+        });
     });
 </script>
 
