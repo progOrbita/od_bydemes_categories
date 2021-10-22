@@ -90,9 +90,7 @@ class Categories
             $this->tree_info .= '<div class="dropdown show">
                 <div class="btn-group">
                     <a class="btn btn-primary"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
-                    
-                <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
-                    </a> ';
+                <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a> ';
         }
         if (!isset($this->parents_list[$parent])) {
             $this->tree_info .= '<a class="dropdown-item"><input type="hidden" value="' . $parent . '"> ' . $this->all_cats[$parent]['name'] . '</a>';
@@ -100,14 +98,15 @@ class Categories
 
         if (isset($this->parents_list[$parent])) {
             if ($parent != $this->root_id) {
-                $this->tree_info .= '<li class="dropdown-submenu">
-                <div class="btn-group">
-                    <a class="btn btn-primary">
-                    <input type="hidden" value="' . $parent . '">
-                    ' . $this->all_cats[$parent]['name'] . '
-                    </a>
-                <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                    </a>';
+                $this->tree_info .= '
+                <li class="dropdown-submenu">
+                    <div class="btn-group">
+                        <a class="btn btn-primary">
+                        <input type="hidden" value="' . $parent . '">
+                        ' . $this->all_cats[$parent]['name'] . '
+                        </a>
+                    <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></a>
+                ';
             }
             $this->tree_info .= '<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
             //Obtaining the childs of the parent
@@ -117,7 +116,10 @@ class Categories
                 $this->display_categories((int) $child);
             }
             if ($parent != $this->root_id) {
-                $this->tree_info .= '</ul></li>';
+                $this->tree_info .= '
+                        </ul>
+                    </div>
+                </li>';
             }
             //Returns the tree, adding end tags
             if ($parent === $this->root_id) {
@@ -134,7 +136,6 @@ class Categories
      */
     public function display_parent(int $id_category, int $root)
     {
-
         $this->arr_parents[$id_category] = $this->all_cats[$id_category]['name'];
         $new_par = $this->all_cats[$id_category]['id_parent'];
 
