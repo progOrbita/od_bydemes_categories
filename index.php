@@ -26,20 +26,23 @@ if (isset($_POST['id_cat'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
+        
         .btn-group{
-            background-color: #007bff;
+            background-color: #6c757d;
             border-radius: 5px;
             padding: 5px;
         }
         .dropdown-menu {
-            background-color: #007bff;
+            background-color: #6c757d;
         }
         .dropdown-item {
             border-radius: 5px;
+            color: whitesmoke;
         }
         .dropdown-item:hover{
             cursor: pointer;
         }
+
         /**To make submenus in bootstrap because by default only can have one level, nested menus doesnt work */
         .dropdown-submenu {
             position: relative;

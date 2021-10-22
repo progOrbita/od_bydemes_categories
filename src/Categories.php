@@ -65,7 +65,6 @@ class Categories
         foreach ($cats_info as $cat_values) {
             $cat_parent = $cat_values['id_parent'];
             $cat_id = $cat_values['id_category'];
-
             $this->parents_list[$cat_parent][] = $cat_id;
             $this->all_cats[$cat_id] = $cat_values;
         }
@@ -92,7 +91,7 @@ class Categories
             $this->tree_info .= '<div id="cat_root" class="dropdown-menu">
                 <div class="btn-group">
                     <a class="dropdown-item"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
-                <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a> ';
+                <a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a> ';
         }
         if (!isset($this->parents_list[$parent])) {
             $this->tree_info .= '<a class="dropdown-item"><input type="hidden" value="' . $parent . '"> ' . $this->all_cats[$parent]['name'] . '</a>';
@@ -107,7 +106,7 @@ class Categories
                         <input type="hidden" value="' . $parent . '">
                         ' . $this->all_cats[$parent]['name'] . '
                         </a>
-                    <a class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></a>
+                    <a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></a>
                 ';
             }
             $this->tree_info .= '<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
