@@ -50,17 +50,14 @@ if (isset($_POST['id_cat'])) {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script>
     $(document).ready(function() {
-        //Dropdown-submenu
-        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
-            if (!$(this).next().hasClass('show')) {
-                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
-            }
-            let subMenu = $(this).next('.dropdown-menu');
-            subMenu.toggleClass('show');
+
+        //Clicking on a submenu, removes the current selected category. Then add the style it to the category submenu selected
+        $('.dropdown-menu a.dropdown-toggle').on('click', function() {
 
             if (!$(this).next().hasClass('selected')) {
                 $(this).parents('.dropdown-menu').first('.dropdown-toggle').find('.selected').removeClass('selected');
             }
+
             let selection = $(this).first('.dropdown-toggle');
             let group = $(this).closest('.dropdown-submenu');
             selection.toggleClass('selected');
@@ -69,8 +66,20 @@ if (isset($_POST['id_cat'])) {
             return false;
         });
 
+        //Whenever any category is clicked
+        //Removes inferior levels from the current category, then shows the submenu of the category if have any
+        $('.dropdown-menu a.dropdown-toggle, .dropdown-item').on('click', function() {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
+            let subMenu = $(this).next('.dropdown-menu');
+            subMenu.toggleClass('show');
+
+            return false;
+        });
+
+        //Clicking on any category, removes the current selected category and add selected to the clicked one
         $('.dropdown-item').on('click', function() {
-            $(this).parents('.dropdown-menu').first('.dropdown-item');
 
             $(this).parents('.dropdown-menu').first('.dropdown-item').find('.selected').removeClass('selected');
             $(this).addClass('selected');
