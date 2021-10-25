@@ -32,6 +32,12 @@ if (isset($_POST['id_cat'])) {
             border-radius: 5px;
             padding: 5px;
         }
+
+        .selected {
+            background-color: rgb(54, 58, 54);
+            color: white;
+        }
+
         .dropdown-menu {
             background-color: #6c757d;
         }
@@ -101,6 +107,12 @@ if (isset($_POST['id_cat'])) {
             }
             var $subMenu = $(this).next('.dropdown-menu');
             $subMenu.toggleClass('show');
+            if (!$(this).next().hasClass('selected')) {
+                $(this).parents('.dropdown-menu').first().find('.selected').removeClass('selected');
+            }
+            let selection = $(this).first('dropdown-toggle');
+            selection.toggleClass('selected');
+
 
             return false;
         });
