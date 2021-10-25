@@ -59,12 +59,13 @@ if (isset($_POST['id_cat'])) {
             subMenu.toggleClass('show');
 
             if (!$(this).next().hasClass('selected')) {
-                $(this).parents('.dropdown-menu').first().find('.selected').removeClass('selected');
+                $(this).parents('.dropdown-menu').first('.dropdown-toggle').find('.selected').removeClass('selected');
             }
             let selection = $(this).first('.dropdown-toggle');
-            let group = $(this).closest('.btn-group');
+            let group = $(this).closest('.dropdown-submenu');
             selection.toggleClass('selected');
             group.toggleClass('selected');
+
             return false;
         });
 
