@@ -33,11 +33,11 @@ if (isset($_POST['id_cat'])) {
 
     echo '<div class="container-fluid">
         <div class="row">
-            <div class="col" id="tree">' .
+            <div class="col-7" id="tree">' .
         $categories->display_categories($root_id) .
         '</div>
             </div>
-            <div class="col" id="parents">' .
+            <div class="col-5" id="parents">' .
         $categories->display_parent($root_id, $root_id) .
         '</div>
         </div>
