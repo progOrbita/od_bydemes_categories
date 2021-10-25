@@ -26,8 +26,7 @@ if (isset($_POST['id_cat'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
-        
-        .btn-group{
+        .btn-group {
             background-color: #6c757d;
             border-radius: 5px;
             padding: 5px;
@@ -41,11 +40,13 @@ if (isset($_POST['id_cat'])) {
         .dropdown-menu {
             background-color: #6c757d;
         }
+
         .dropdown-item {
             border-radius: 5px;
             color: whitesmoke;
         }
-        .dropdown-item:hover{
+
+        .dropdown-item:hover {
             cursor: pointer;
         }
 
@@ -67,12 +68,15 @@ if (isset($_POST['id_cat'])) {
             margin-left: .1rem;
             margin-right: .1rem;
         }
-        #cat_root{
+
+        #cat_root {
             display: block;
             padding: 0px;
             min-width: 0px;
         }
-        #tree, #parents{
+
+        #tree,
+        #parents {
             margin-top: 12px;
         }
     </style>
@@ -80,16 +84,16 @@ if (isset($_POST['id_cat'])) {
 
 <body>
     <?php
-    echo
-    '<div class="container-fluid">
+
+    echo '<div class="container-fluid">
         <div class="row">
             <div class="col" id="tree">' .
-            $categories->display_categories($root_id) .
-            '</div>
+        $categories->display_categories($root_id) .
+        '</div>
             </div>
             <div class="col" id="parents">' .
-                $categories->display_parent($root_id, $root_id) .
-            '</div>
+        $categories->display_parent($root_id, $root_id) .
+        '</div>
         </div>
     </div>';
     ?>
