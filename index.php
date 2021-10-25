@@ -33,13 +33,16 @@ if (isset($_POST['id_cat'])) {
 
     echo '<div class="container-fluid">
         <div class="row">
-            <div class="col-7" id="tree">' .
+            <div class="col-6" id="tree">' .
         $categories->display_categories($root_id) .
         '</div>
             </div>
-            <div class="col-5" id="parents">' .
+            <div class="col-6" id="parents">
+            <p>Click to see products inside that category</p>
+                <div id="parents_list">' .
         $categories->display_parent($root_id, $root_id) .
-        '</div>
+                '</div>
+            </div>
         </div>
     </div>';
     ?>
@@ -98,8 +101,8 @@ if (isset($_POST['id_cat'])) {
                 type: "POST"
             });
             ajaxRequest.done(function(data) {
-                $('#parents').empty();
-                $('#parents').append(data);
+                $('#parents_list').empty();
+                $('#parents_list').append(data);
             });
         });
     });
