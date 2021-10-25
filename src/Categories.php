@@ -44,6 +44,9 @@ class Categories
 
         $this->generateArrays($categories_data);
     }
+    /**
+     * Find all the categories inserted in the database
+     */
     private function find_categories()
     {
 
@@ -53,12 +56,18 @@ class Categories
 
         return $cat_query;
     }
-
+    /**
+     * Finds the root category inserted in the database.
+     */
     private function findCategoryRoot()
     {
         $this->root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM `' . _DB_PREFIX_ . 'category` WHERE is_root_category = 1');
+        return;
     }
-
+    /**
+     * Generates an array with all the categories with their information and the parents with their childs
+     * @param array $cats_info categories information
+     */
     private function generateArrays(array $cats_info)
     {
         //key -> id_category. value are the fields: id_category, id_parent, and name from category_lang
@@ -68,6 +77,7 @@ class Categories
             $this->parents_list[$cat_parent][] = $cat_id;
             $this->all_cats[$cat_id] = $cat_values;
         }
+        return;
     }
     /**
      * Obtains the id of the root category
@@ -90,8 +100,11 @@ class Categories
         if ($parent == $this->root_id) {
             $this->tree_info .= '<div id="cat_root" class="dropdown-menu">
                 <div class="btn-group dropright">
-                    <a class="dropdown-item"><input type="hidden" value="' . $parent . '">' . $this->all_cats[$parent]['name'] . '</a>
-                <a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a> ';
+                    <a class="dropdown-item">
+                        <input type="hidden" value="' . $parent . '">
+                        ' . $this->all_cats[$parent]['name'] . '
+                    </a>
+                    <a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></a> ';
         }
         if (!isset($this->parents_list[$parent])) {
             $this->tree_info .= '<a class="dropdown-item"><input type="hidden" value="' . $parent . '"> ' . $this->all_cats[$parent]['name'] . '</a>';
