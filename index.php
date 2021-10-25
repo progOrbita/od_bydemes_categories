@@ -68,11 +68,13 @@ if (isset($_POST['id_cat'])) {
             return false;
         });
 
-        $('.dropdown-item').on('click', function(){
-            $(this).parents('.dropdown-menu').first('dropdown-item').find('.selected').removeClass('selected');
+        $('.dropdown-item').on('click', function() {
+            $(this).parents('.dropdown-menu').first('.dropdown-item');
+
+            $(this).parents('.dropdown-menu').first('.dropdown-item').find('.selected').removeClass('selected');
             $(this).addClass('selected');
         });
-        
+
         //Select all the links (parent and childs) that aren't the small icon
         $('.dropdown-item').on('click', function() {
             let id = $(this).find('input').val();
