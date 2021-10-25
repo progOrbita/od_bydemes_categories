@@ -1,0 +1,50 @@
+.btn-group {
+  border-radius: 5px;
+  position: initial;
+}
+
+.dropdown-menu {
+  background-color: #6c757d;
+}
+
+.dropdown-item {
+  border-radius: 5px;
+  color: whitesmoke;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
+}
+
+/**To make submenus in bootstrap because by default only can have one level, nested menus doesnt work */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+}
+
+.notice{
+    background-color: blue;
+}
+
+.selected {
+  background-color: rgb(54, 58, 54);
+  border-color: rgb(54, 58, 54);
+  color: white;
+}
+
+#cat_root {
+  display: block;
+  padding: 0px;
+  min-width: 0px;
+}
+
+#tree,
+#parents {
+  margin-top: 12px;
+}
