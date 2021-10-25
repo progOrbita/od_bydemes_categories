@@ -115,12 +115,18 @@ if (isset($_POST['id_cat'])) {
             if (!$(this).next().hasClass('selected')) {
                 $(this).parents('.dropdown-menu').first().find('.selected').removeClass('selected');
             }
-            let selection = $(this).first('dropdown-toggle');
+            let selection = $(this).first('.dropdown-toggle');
+            let group = $(this).closest('.btn-group');
             selection.toggleClass('selected');
-
-
+            group.toggleClass('selected');
             return false;
         });
+
+        $('.dropdown-item').on('click', function(){
+            $(this).parents('.dropdown-menu').first('dropdown-item').find('.selected').removeClass('selected');
+            $(this).addClass('selected');
+        });
+        
         //Select all the links (parent and childs) that aren't the small icon
         $('.dropdown-item').on('click', function() {
             let id = $(this).find('input').val();
