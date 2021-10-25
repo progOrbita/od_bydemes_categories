@@ -105,8 +105,9 @@ if (isset($_POST['id_cat'])) {
             if (!$(this).next().hasClass('show')) {
                 $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
             }
-            var $subMenu = $(this).next('.dropdown-menu');
-            $subMenu.toggleClass('show');
+            let subMenu = $(this).next('.dropdown-menu');
+            subMenu.toggleClass('show');
+
             if (!$(this).next().hasClass('selected')) {
                 $(this).parents('.dropdown-menu').first().find('.selected').removeClass('selected');
             }
